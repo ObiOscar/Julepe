@@ -9,6 +9,7 @@ public class Jugador
 {
     private String nombreJugador;
     private Carta[]cartasJugador;
+    private int numeroCartasEnMano;
 
     /**
      * Constructor for objects of class Jugador
@@ -17,15 +18,22 @@ public class Jugador
     {
         cartasJugador = new Carta[5];
         nombreJugador = nombre;
+        numeroCartasEnMano = 0;
     }
 
     /**
+     * El jugador recibe una carta
      */
     public void recibirCarta(Carta nuevaCarta)
     {
-      int j = 0;
-      boolean buscando = true;
-      while(j < cartasJugador.length && buscando){
+      if(numeroCartasEnMano < 5){
+          cartasJugador[numeroCartasEnMano] = nuevaCarta;
+          numeroCartasEnMano++;
+        }
+        
+      /*int j = 0;                                          //Esta es mi solución, bastante menos optimizada que la presentada arriba, la desventaja de la solución de arriba es la creación de un atributo, y la posibilidad de olvidar incrementar 
+      boolean buscando = true;                              //la variable.
+      while(j < cartasJugador.length && buscando){      
          if(cartasJugador[j] == null){
              cartasJugador[j] = nuevaCarta;  
              buscando = false;
@@ -35,22 +43,20 @@ public class Jugador
       
       if(j == cartasJugador.length){
          System.out.println("El jugador " + nombreJugador + " tiene ya tiene 5 cartas en su mano");
-      }
+      }*/
     }
     
     /**
+     * Imprime por pantalla las cartas del jugador
      */
     public void verCartasDelJugador(){
       for(int j = 0; j < cartasJugador.length; j++){
+          if(cartasJugador[j] != null)
           System.out.println(cartasJugador[j]);
         }
     }
+    
+    public String getNombre(){
+        return nombreJugador;
+    }
 }
-
-
-/*    
-          if(cartasJugador.length < 5){
-         for(int j = 0; j < cartasJugador.length; j++){
-          cartasJugador[j] = nuevaCarta;      
-        }
-      } */
