@@ -32,5 +32,14 @@ public class Baza
    	   }*/
     }
     
+    /**Tenga un método llamado getPaloPrimeraCartaDeLaBaza sin parámetros que devuelva un entero que representa el palo 
+     *de la primera carta añadida a la baza o -1 en caso de que no se haya añadido aún ninguna carta.*/
+    public int getPaloPrimeraCartaDeLaBaza(){
+		int paloPrimeraCartaBaza = -1;
+		if (cartasDeLaBaza.size() > 0){
+			paloPrimeraCartaBaza = cartasDeLaBaza.get(0).getVpaloCarta();
+		}
+		return paloPrimeraCartaBaza;
+	}
 
 }
