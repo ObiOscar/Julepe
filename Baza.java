@@ -4,6 +4,7 @@ public class Baza
     private int numeroJugadoresLanzanCarta;     // Numero de jugadores que van a tirar carta
     private int paloPinta;                      // Indica el palo que pinta
     private ArrayList<Carta> cartasDeLaBaza;    // Creo un ArrayList de la clase Carta y lo llamo cartas del Mazo
+    private ArrayList<String> nombreJugador;    // ArrayList con los nombres de los jugadores
     private Jugador[]jugadoresEnPartida;        // Jugadores que juegan    
 
     /**
@@ -15,6 +16,7 @@ public class Baza
         paloPinta = palo;
         cartasDeLaBaza = new ArrayList<Carta>();
         jugadoresEnPartida = new Jugador[numeroJugadoresJuegan];
+        nombreJugador = new ArrayList<String>();
     }
     
     /**
@@ -23,8 +25,9 @@ public class Baza
      * No hace falta comprobar que la carta añadida sea o no null, se supone que es una carta. 
      * El segundo parámetro indica el nombre del jugador que tiro la carta. El método no devuelve nada.
      */
-    public void addCarta(Carta cartaLanzadaJugador, String nombreJugador){
-       cartasDeLaBaza.add(cartaLanzadaJugador);  //No tiene mucho sentido, guarda la carta en el ArrayList, independientemente de que la carta la tenga el jugador
+    public void addCarta(Carta cartaLanzadaJugador, String nombreJugadores){
+	   cartasDeLaBaza.add(cartaLanzadaJugador);  //No tiene mucho sentido, guarda la carta en el ArrayList, independientemente de que la carta la tenga el jugador
+	   nombreJugador.add(nombreJugadores);
        /*for(Jugador jugador : jugadoresEnPartida){
 			if(jugador.getNombre().equals(nombre)){
                cartasDeLaBaza.add(jugador.tirarCarta(cartaLanzadaJugador.toString()));
@@ -57,6 +60,27 @@ public class Baza
 			}
 		}	
 		return comprobarCarta;
+	}
+
+	/**Tenga un método llamado nombreJugadorQueVaGanandoLaBaza que no admite parámetros y que devuelve el nombre del jugador 
+	 *que va ganando la baza en el momento actual.
+	*/
+	public String nombreJugadorQueVaGanandoLaBaza (){
+		String nombreGanador = "";
+		Carta comprobarCarta = null;
+
+		int contador = 0;
+		while(contador < cartasDeLaBaza.size()){
+			if(comprobarCarta == null){
+				comprobarCarta = cartasDeLaBaza.get(0);
+			}			
+			if (!comprobarCarta.ganaA(cartasDeLaBaza.get(contador), paloPinta)){
+				comprobarCarta = cartasDeLaBaza.get(contador);
+			}
+			contador++;
+		}	
+		nombreGanador = nombreJugador.get(contador);
+		return nombreGanador;
 	}
 
 }
