@@ -76,10 +76,10 @@ public class Baza
 			}			
 			if (!comprobarCarta.ganaA(cartasDeLaBaza.get(contador), paloPinta)){
 				comprobarCarta = cartasDeLaBaza.get(contador);
+				nombreGanador = nombreJugador.get(contador);
 			}
 			contador++;
 		}	
-		nombreGanador = nombreJugador.get(contador);
 		return nombreGanador;
 	}
 
