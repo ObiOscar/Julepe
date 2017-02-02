@@ -13,7 +13,8 @@ public class Juego
     private Carta paloPinta;
     private ArrayList<String> nombreJugadores;
     private Jugador[] listaJugadores;
-
+    private ArrayList<Carta> cartasJugador;
+    
     private Mazo nuevoMazo;
     private String nombreHumano;
 
@@ -28,6 +29,7 @@ public class Juego
         nombreJugadores = new ArrayList<String>();
         nombreHumano = nombrePersona;
         listaJugadores[0] = new Jugador (nombreHumano);
+        cartasJugador = new ArrayList<Carta>();
         
         nombreJugadores.add(" Manolo");
         nombreJugadores.add(" Roberto");
@@ -56,7 +58,7 @@ public class Juego
      * Implementar en esa clase un método llamado repartir que coja el mazo y de 5 cartas a los jugadores creados. La entrega de cartas debe ser al estilo del reparto que se hace en la realidad, 
      *es decir, primero se baraja y luego se entrega una carta a cada jugador. La última carta entregada indica el palo que pinta, que debe registrarse de alguna foma.
      */
-    public void reapartir(){
+    public int reapartir(){
         Carta nuevaCarta = null;
         for(int contadorLento = 0; contadorLento < 5; contadorLento++){
               for(int contador = 0; contador < listaJugadores.length; contador++){
@@ -84,11 +86,13 @@ public class Juego
             textoPalo = "Pinta en bastos"; 
             break;
         }
-        System.out.println(nuevaCarta.getVpaloCarta());
+
         System.out.println(textoPalo);
         System.out.println("");
         System.out.println("Sus cartas son:");
-        verCartasJugadorHumano(nombreHumano);
+        verCartasJugadorHumano();
+        
+        return nuevaCarta.getVpaloCarta();
 
     }
 
@@ -103,8 +107,7 @@ public class Juego
         }
     }
     
-    public void verCartasJugadorHumano(String nombre){
+    public void verCartasJugadorHumano(){
           hacerTrampasYVerCartasDeJugador(nombreHumano);
     }
 }
-

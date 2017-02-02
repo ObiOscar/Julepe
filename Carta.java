@@ -82,4 +82,37 @@ public class Carta
     {
         return paloCarta;
     }
+    
+    public boolean ganaA(Carta cartaAComparar, int paloQuePinta)
+    {
+       boolean gana = false;
+    
+       if (paloCarta == cartaAComparar.getVpaloCarta()) {
+           // En caso de que tengan el mismo palo...
+           if (getPosicionEscalaTute() > cartaAComparar.getPosicionEscalaTute()) {
+               gana = true;
+           }
+       }
+       else{
+           // En caso de que tengan distinto palo...
+           if (cartaAComparar.getVpaloCarta() != paloQuePinta) {
+               gana = true;
+           }
+       } 
+       return gana;
+   }
+  
+  
+   public int getPosicionEscalaTute() 
+   {
+      int posicion = valorCarta;
+      if (valorCarta == 3) {
+        posicion = 13;
+      }
+      else if (valorCarta == 1) {
+        posicion = 14;
+      }
+      return posicion;    
+   }
+  
 }

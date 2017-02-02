@@ -1,3 +1,4 @@
+import java.util.Random;
 /**
  * Añadir la clase Jugador que permita a un jugador identificado por un nombre (en formato String) ser capaz de tener hasta 5 cartas. El constructor debe admitir el nombre del jugador como parámetro. 
  * Además debe haber un método llamado recibirCarta que permita un parametro de tipo Carta y un método llamado verCartasJugador que imprima por pantalla las cartas del jugador, una por linea, y que funcione tenga las cartas que tenga.
@@ -56,7 +57,68 @@ public class Jugador
         }
     }
     
+    /**
+     * Lo creo para ver que cartas tiene cada jugador
+     */
+    public Carta  CartasDelJugador(){
+      Carta cartaJugador = null;  
+        
+      for(int j = 0; j < cartasJugador.length; j++){
+          if(cartasJugador[j] != null)
+          cartaJugador = cartasJugador[j];
+        }
+      return cartaJugador;
+    }
+    
     public String getNombre(){
         return nombreJugador;
+    }
+    
+    /**
+     * Exista un nuevo método que sea tirarCarta. Admite un parámetro String que indica el nombre de la carta a tirar. 
+     * El método muestra por pantalla el nombre del jugador que ha tirado la carta y la carta tirada. 
+     * Devuelve la carta tirada. En caso de que el jugador no tenga cartas o de que el nombre especificado como parámetro no coincida con ninguna carta, devuelve null.
+     */
+        public Carta tirarCarta(String nombreCartaAJugar){
+          Carta cartaJugada = null;
+        if(numeroCartasEnMano > 0){
+            int cartaActual = 0;
+            boolean buscando = true;
+            while(cartaActual < cartasJugador.length && buscando){
+                if(cartasJugador[cartaActual] != null){
+                    if(nombreCartaAJugar.equals(cartasJugador[cartaActual].toString())){
+                        buscando = false;
+                        cartaJugada = cartasJugador[cartaActual];
+                        numeroCartasEnMano--;
+                        System.out.println("El jugador "+ nombreJugador + " ha jugado la carta "+ cartasJugador[cartaActual]);
+                        cartasJugador[cartaActual] = null;
+                    }
+                    cartaActual++;
+                }
+            }
+        }
+          return cartaJugada;
+    }
+    
+     /**
+     * Tira una carta aleatoria
+     */
+        public Carta tirarCartaAleatoria(){
+        Carta cartaJugada = null; 
+        if(numeroCartasEnMano > 0){
+          Random aleatorio = new Random();
+          boolean buscadorDeCartas = false;
+          while(!buscadorDeCartas  ){
+             int numeroAleatorio = aleatorio.nextInt(5);
+             if(cartasJugador[numeroAleatorio] != null){
+                  cartaJugada = cartasJugador[numeroAleatorio];
+                  numeroCartasEnMano--;
+                  System.out.println("El jugador "+ nombreJugador + " ha jugado la carta "+ cartasJugador[numeroAleatorio]);
+                  cartasJugador[numeroAleatorio] = null;
+                  buscadorDeCartas = true;
+             }
+          }
+           }
+          return cartaJugada;
     }
 }
